@@ -7,7 +7,10 @@ ARG USER_GID=1000
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ="Asia/Taipei" \
     LANG="en_US.UTF-8" \
-    TERM="xterm-256color"
+    TERM="xterm-256color" \
+    USER_NAME=${USER_NAME} \
+    HOME=/home/${USER_NAME} \
+    XAUTHORITY=/home/${USER_NAME}/.Xauthority
 
 RUN set -eux && \
     echo "========== Installing dependencies ==========" && \
@@ -76,8 +79,13 @@ RUN set -eux && \
     xfce4 \
     xfce4-terminal \
     dbus-x11 \
+    xauth \
+    at-spi2-core \
+    libnotify-bin \
+    pm-utils \
     tightvncserver \
-    tigervnc-standalone-server && \
+    tigervnc-standalone-server \
+    tigervnc-tools && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     echo "========== Setting locale ==========" && \
     locale-gen ${LANG} && \
@@ -90,9 +98,9 @@ RUN set -eux && \
 
 RUN (getent group ${USER_GID} || groupadd --gid ${USER_GID} ${USER_NAME}) \
     && useradd -m -u ${USER_UID} -g ${USER_GID} -s /bin/bash ${USER_NAME} \
-    && mkdir -p /workspace && chown -R ${USER_UID}:${USER_GID} /workspace
-
-RUN mkdir -p /home/${USER_NAME}/.vnc \
+    && mkdir -p /workspace \
+    && chown -R ${USER_UID}:${USER_GID} /workspace \
+    && mkdir -p /home/${USER_NAME}/.vnc \
     && printf '#!/bin/sh\nstartxfce4\n' > /home/${USER_NAME}/.vnc/xstartup \
     && chmod +x /home/${USER_NAME}/.vnc/xstartup \
     && chown -R ${USER_UID}:${USER_GID} /home/${USER_NAME}/.vnc
@@ -103,4 +111,5 @@ EXPOSE 5901
 
 USER ${USER_NAME}
 
-CMD ["bash", "-lc", "if [ -n \"$VNC_PASSWORD\" ]; then mkdir -p /home/${USER_NAME}/.vnc && printf \"%s\\n\" \"$VNC_PASSWORD\" | vncpasswd -f > /home/${USER_NAME}/.vnc/passwd && chmod 600 /home/${USER_NAME}/.vnc/passwd; fi; vncserver :1 -geometry 1920x1080 -depth 24 -localhost no && tail -f /home/${USER_NAME}/.vnc/*.log"]
+CMD ["bash", "-lc", "if [ -n \"$VNC_PASSWORD\" ]; then mkdir -p \"$HOME/.vnc\" && printf \"%s\\n\" \"$VNC_PASSWORD\" | tigervncpasswd -f > \"$HOME/.vnc/passwd\" && chmod 600 \"$HOME/.vnc/passwd\"; fi; vncserver :1 -geometry 1920x1080 -depth 24 -localhost no && tail -f \"$HOME/.vnc\"/*.log"]
+
