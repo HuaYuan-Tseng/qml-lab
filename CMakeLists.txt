@@ -89,6 +89,7 @@ set(CMAKE_COMPILE_PDB_OUTPUT_DIRECTORY
 # Second, for multi-config builds (e.g. msvc)
 foreach(OUTPUT_CONFIG ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER ${OUTPUT_CONFIG} OUTPUT_CONFIG)
+
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUT_CONFIG}
         ${CMAKE_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
 
@@ -131,30 +132,33 @@ qt_policy(SET QTP0004 NEW)
 # Headers and sources.
 # ------------------------------------------------------------------------------
 
+# --- Hello QML ---
+
+set(HELLO_QML_APP "hello-qml-app")
+
 qt_standard_project_setup()
-qt_add_executable(${PROJECT_NAME}-app "")
-qt_add_qml_module(${PROJECT_NAME}-app
-    URI QmlLab
+qt_add_executable(${HELLO_QML_APP} "")
+qt_add_qml_module(${HELLO_QML_APP}
+    URI HelloQML
     VERSION 1.0
-    # RESOURCE_PREFIX /qml-lab
     QML_FILES
-    src/app/qml/Main.qml
+    ${HELLO_QML_QML}
 )
-target_sources(${PROJECT_NAME}-app
+target_sources(${HELLO_QML_APP}
     PRIVATE
-    ${APP_SOURCE}
+    ${HELLO_QML_SOURCE}
 )
-target_include_directories(${PROJECT_NAME}-app
+target_include_directories(${HELLO_QML_APP}
     PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/app
+    ${CMAKE_SOURCE_DIR}/src/hello-qml
 )
-target_link_libraries(${PROJECT_NAME}-app
+target_link_libraries(${HELLO_QML_APP}
     PRIVATE
     Qt6::Quick
 )
-set_target_properties(${PROJECT_NAME}-app
+set_target_properties(${HELLO_QML_APP}
     PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER qml-lab
+    MACOSX_BUNDLE_GUI_IDENTIFIER ${PROJECT_NAME}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
@@ -173,7 +177,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 endif()
 
-set_project_warnings(${PROJECT_NAME}-app)
+set_project_warnings(${HELLO_QML_APP})
 
 # -----------------------------------------------------------------------------
 # Print the final status.

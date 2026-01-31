@@ -1,6 +1,6 @@
-set(APP_SOURCE
-  ${CMAKE_SOURCE_DIR}/src/app/main.cpp
+set(HELLO_QML_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/hello-qml/main.cpp
 )
-set(APP_QML
-  ${CMAKE_SOURCE_DIR}/src/app/qml/Main.qml
+set(HELLO_QML_QML
+  src/hello-qml/qml/Main.qml
 )
