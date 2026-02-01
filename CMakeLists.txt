@@ -192,6 +192,33 @@ set_target_properties(${SIGNAL_SLOT_APP}
     WIN32_EXECUTABLE TRUE
 )
 
+# --- QObject Tree ---
+
+set(QOBJECT_TREE_APP "qobject-tree-app")
+
+qt_standard_project_setup()
+qt_add_executable(${QOBJECT_TREE_APP} "")
+target_sources(${QOBJECT_TREE_APP}
+    PRIVATE
+    ${QOBJECT_TREE_SOURCE}
+)
+target_include_directories(${QOBJECT_TREE_APP}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/qobject-tree
+)
+target_link_libraries(${QOBJECT_TREE_APP}
+    PRIVATE
+    Qt6::Core
+)
+set_target_properties(${QOBJECT_TREE_APP}
+    PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER ${PROJECT_NAME}
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
 # -----------------------------------------------------------------------------
 # Set the building and warning options.
 # -----------------------------------------------------------------------------
@@ -206,6 +233,7 @@ endif()
 
 set_project_warnings(${HELLO_QML_APP})
 set_project_warnings(${SIGNAL_SLOT_APP})
+set_project_warnings(${QOBJECT_TREE_APP})
 
 # -----------------------------------------------------------------------------
 # Print the final status.

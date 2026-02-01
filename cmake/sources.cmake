@@ -12,3 +12,9 @@ set(SIGNAL_SLOT_SOURCE
 )
 set(SIGNAL_SLOT_QML
 )
+set(QOBJECT_TREE_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/qobject-tree/application_window.cpp
+  ${CMAKE_SOURCE_DIR}/src/qobject-tree/main.cpp
+)
+set(QOBJECT_TREE_QML
+)

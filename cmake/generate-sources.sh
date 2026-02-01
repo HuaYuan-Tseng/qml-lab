@@ -45,3 +45,22 @@ find "$SIGNAL_SLOT_DIR" -type f -name "*.qml" 2>/dev/null | sort | while IFS= re
 done
 echo ")" >> "$OUTPUT_FILE"
 
+# src/qobject-tree
+
+QOBJECT_TREE_DIR="$ROOT_DIR/src/qobject-tree"
+echo "set(QOBJECT_TREE_SOURCE" >> "$OUTPUT_FILE"
+find "$QOBJECT_TREE_DIR" -type f -name "*.cpp" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+
+echo "set(QOBJECT_TREE_QML" >> "$OUTPUT_FILE"
+find "$QOBJECT_TREE_DIR" -type f -name "*.qml" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  $RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+
