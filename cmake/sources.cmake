@@ -4,3 +4,11 @@ set(HELLO_QML_SOURCE
 set(HELLO_QML_QML
   src/hello-qml/qml/Main.qml
 )
+set(SIGNAL_SLOT_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/signal-slot/firefox.cpp
+  ${CMAKE_SOURCE_DIR}/src/signal-slot/internet_explorer.cpp
+  ${CMAKE_SOURCE_DIR}/src/signal-slot/main.cpp
+  ${CMAKE_SOURCE_DIR}/src/signal-slot/user_interactor.cpp
+)
+set(SIGNAL_SLOT_QML
+)

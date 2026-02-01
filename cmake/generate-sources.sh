@@ -26,3 +26,22 @@ find "$HELLO_QML_DIR" -type f -name "*.qml" 2>/dev/null | sort | while IFS= read
 done
 echo ")" >> "$OUTPUT_FILE"
 
+# src/signal-lsot
+
+SIGNAL_SLOT_DIR="$ROOT_DIR/src/signal-slot"
+echo "set(SIGNAL_SLOT_SOURCE" >> "$OUTPUT_FILE"
+find "$SIGNAL_SLOT_DIR" -type f -name "*.cpp" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+
+echo "set(SIGNAL_SLOT_QML" >> "$OUTPUT_FILE"
+find "$SIGNAL_SLOT_DIR" -type f -name "*.qml" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  $RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+

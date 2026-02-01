@@ -165,6 +165,33 @@ set_target_properties(${HELLO_QML_APP}
     WIN32_EXECUTABLE TRUE
 )
 
+# --- Signal Slot ---
+
+set(SIGNAL_SLOT_APP "signal-slot-app")
+
+qt_standard_project_setup()
+qt_add_executable(${SIGNAL_SLOT_APP} "")
+target_sources(${SIGNAL_SLOT_APP}
+    PRIVATE
+    ${SIGNAL_SLOT_SOURCE}
+)
+target_include_directories(${SIGNAL_SLOT_APP}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/signal-slot
+)
+target_link_libraries(${SIGNAL_SLOT_APP}
+    PRIVATE
+    Qt6::Core
+)
+set_target_properties(${SIGNAL_SLOT_APP}
+    PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER ${PROJECT_NAME}
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
 # -----------------------------------------------------------------------------
 # Set the building and warning options.
 # -----------------------------------------------------------------------------
@@ -178,6 +205,7 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
 endif()
 
 set_project_warnings(${HELLO_QML_APP})
+set_project_warnings(${SIGNAL_SLOT_APP})
 
 # -----------------------------------------------------------------------------
 # Print the final status.
