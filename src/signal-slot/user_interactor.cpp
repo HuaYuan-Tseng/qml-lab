@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QTextStream>
+#include <QString>
 
 UserInteractor::UserInteractor(QObject* parent)
     : QObject{ parent }
@@ -17,6 +18,18 @@ void UserInteractor::getInput()
 
     if (!phrase.isEmpty())
     {
-        emit phraseTyped(phrase);
+        this->setPhrase(phrase);
     }
+}
+
+QString UserInteractor::phrase() const
+{
+    return phrase_;
+}
+
+void UserInteractor::setPhrase(const QString& new_phrase)
+{
+    if (phrase_ == new_phrase) return;
+    phrase_ = new_phrase;
+    emit phraseTyped(phrase_);
 }
