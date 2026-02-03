@@ -63,4 +63,23 @@ find "$QOBJECT_TREE_DIR" -type f -name "*.qml" 2>/dev/null | sort | while IFS= r
     echo "  $RELATIVE_PATH" >> "$OUTPUT_FILE"
 done
 echo ")" >> "$OUTPUT_FILE"
+#
+# src/intro-quick
+
+INTRO_QUICK_DIR="$ROOT_DIR/src/intro-quick"
+echo "set(INTRO_QUICK_SOURCE" >> "$OUTPUT_FILE"
+find "$INTRO_QUICK_DIR" -type f -name "*.cpp" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+
+echo "set(INTRO_QUICK_QML" >> "$OUTPUT_FILE"
+find "$INTRO_QUICK_DIR" -type f -name "*.qml" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  $RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
 

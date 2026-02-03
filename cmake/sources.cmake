@@ -18,3 +18,10 @@ set(QOBJECT_TREE_SOURCE
 )
 set(QOBJECT_TREE_QML
 )
+set(INTRO_QUICK_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/intro-quick/main.cpp
+)
+set(INTRO_QUICK_QML
+  src/intro-quick/qml/Main.qml
+  src/intro-quick/qml/Main2.qml
+)

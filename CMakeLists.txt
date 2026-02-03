@@ -219,6 +219,40 @@ set_target_properties(${QOBJECT_TREE_APP}
     WIN32_EXECUTABLE TRUE
 )
 
+# --- Intro Quick ---
+
+set(INTRO_QUICK_APP "intro-quick-app")
+
+qt_standard_project_setup()
+qt_add_executable(${INTRO_QUICK_APP} "")
+qt_add_qml_module(${INTRO_QUICK_APP}
+    URI IntroQuick
+    VERSION 1.0
+    QML_FILES
+    ${INTRO_QUICK_QML}
+)
+target_sources(${INTRO_QUICK_APP}
+    PRIVATE
+    ${INTRO_QUICK_SOURCE}
+)
+target_include_directories(${INTRO_QUICK_APP}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/qobject-tree
+)
+target_link_libraries(${INTRO_QUICK_APP}
+    PRIVATE
+    Qt6::Core
+    Qt6::Quick
+)
+set_target_properties(${INTRO_QUICK_APP}
+    PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER ${PROJECT_NAME}
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
 # -----------------------------------------------------------------------------
 # Set the building and warning options.
 # -----------------------------------------------------------------------------
