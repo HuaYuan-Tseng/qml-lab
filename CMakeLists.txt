@@ -237,7 +237,7 @@ target_sources(${INTRO_QUICK_APP}
 )
 target_include_directories(${INTRO_QUICK_APP}
     PRIVATE
-    ${CMAKE_SOURCE_DIR}/src/qobject-tree
+    ${CMAKE_SOURCE_DIR}/src/intro-quick
 )
 target_link_libraries(${INTRO_QUICK_APP}
     PRIVATE
@@ -252,6 +252,41 @@ set_target_properties(${INTRO_QUICK_APP}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
+
+# --- Pos Layout ---
+
+set(POS_LAYOUT_APP "pos-layout-app")
+
+qt_standard_project_setup()
+qt_add_executable(${POS_LAYOUT_APP} "")
+qt_add_qml_module(${POS_LAYOUT_APP}
+    URI PosLayout
+    VERSION 1.0
+    QML_FILES
+    ${POS_LAYOUT_QML}
+)
+target_sources(${POS_LAYOUT_APP}
+    PRIVATE
+    ${POS_LAYOUT_SOURCE}
+)
+target_include_directories(${POS_LAYOUT_APP}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/pos-layout
+)
+target_link_libraries(${POS_LAYOUT_APP}
+    PRIVATE
+    Qt6::Core
+    Qt6::Quick
+)
+set_target_properties(${POS_LAYOUT_APP}
+    PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER ${PROJECT_NAME}
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
 
 # -----------------------------------------------------------------------------
 # Set the building and warning options.
@@ -268,6 +303,8 @@ endif()
 set_project_warnings(${HELLO_QML_APP})
 set_project_warnings(${SIGNAL_SLOT_APP})
 set_project_warnings(${QOBJECT_TREE_APP})
+set_project_warnings(${INTRO_QUICK_APP})
+set_project_warnings(${POS_LAYOUT_APP})
 
 # -----------------------------------------------------------------------------
 # Print the final status.

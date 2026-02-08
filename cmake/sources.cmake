@@ -25,3 +25,9 @@ set(INTRO_QUICK_QML
   src/intro-quick/qml/Main.qml
   src/intro-quick/qml/Main2.qml
 )
+set(POS_LAYOUT_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/pos-layout/main.cpp
+)
+set(POS_LAYOUT_QML
+  src/pos-layout/qml/Main.qml
+)
