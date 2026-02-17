@@ -128,6 +128,16 @@ echo "set(SONG_PLAYER_SOURCE" >> "$OUTPUT_FILE"
 find "$SONG_PLAYER_DIR" -type f -name "*.cpp" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
     RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
     RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    if [[ ! "$RELATIVE_PATH" =~ audio_info\. ]]; then
+        echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
+    fi
+done
+echo ")" >> "$OUTPUT_FILE"
+
+echo "set(SONG_PLAYER_QML_CPP_SOURCE" >> "$OUTPUT_FILE"
+find "$SONG_PLAYER_DIR" -type f \( -name "audio_info.cpp" -o -name "audio_info.h" \) 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
     echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
 done
 echo ")" >> "$OUTPUT_FILE"
@@ -141,7 +151,7 @@ done
 echo ")" >> "$OUTPUT_FILE"
 
 echo "set(SONG_PLAYER_RESOURCE" >> "$OUTPUT_FILE"
-find "$SONG_PLAYER_DIR" -type f \( -name "*.ico" -o -name "*.png" -o -name "*.jpg" -o -name "*.avi" \) 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+find "$SONG_PLAYER_DIR" -type f \( -name "*.ico" -o -name "*.png" -o -name "*.jpg" -o -name "*.avi" -o -name "*.mp3" \) 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
     RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
     RELATIVE_PATH="${RELATIVE_PATH//\\//}"
     echo "  $RELATIVE_PATH" >> "$OUTPUT_FILE"

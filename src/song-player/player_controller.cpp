@@ -1,8 +1,17 @@
 #include "player_controller.h"
 
+#include <QMediaDevices>
+#include <QAudioDevice>
+#include <QAudioOutput>
+
 PlayerController::PlayerController(QObject* parent)
     : QObject{ parent }
 {
+    const auto& audioOutputs = QMediaDevices::audioOutputs();
+    if (!audioOutputs.isEmpty())
+    {
+        m_mediaPlayer.setAudioOutput(new QAudioOutput(&m_mediaPlayer));
+    }
 }
 
 int PlayerController::currentSongIndex() const
@@ -51,5 +60,24 @@ void PlayerController::switchToPreviousSong()
 void PlayerController::playPause()
 {
     m_playing = !m_playing;
+
+    if (m_playing)
+    {
+        m_mediaPlayer.play();
+    }
+    else
+    {
+        m_mediaPlayer.pause();
+    }
     emit playingChanged();
+}
+
+void PlayerController::changeAudioSource(const QUrl& source)
+{
+    m_mediaPlayer.stop();
+    m_mediaPlayer.setSource(source);
+    if (m_playing)
+    {
+        m_mediaPlayer.play();
+    }
 }

@@ -1,17 +1,14 @@
 import QtQuick
 import QtMultimedia
 import com.PlayerController
+import SongPlayer
 
 Item {
     id: root
 
-    required property int songIndex
-    property alias title: titleText.text
-    property alias authorName: authorText.text
-    property alias imageSource: albumImage.source
-    property alias videoSource: albumVideo.source
+    readonly property AudioInfo infoProvider: AudioInfo {}
 
-    visible: PlayerController.currentSongIndex === root.songIndex
+    visible: PlayerController.currentSongIndex === infoProvider.songIndex
 
     Image {
         id: albumImage
@@ -23,6 +20,8 @@ Item {
 
         width: 150
         height: 150
+
+        source: infoProvider.imageSource
     }
 
     Video {
@@ -38,6 +37,8 @@ Item {
 
         loops: MediaPlayer.Infinite
         volume: 0
+
+        source: infoProvider.videoSource
     }
 
     Text {
@@ -52,6 +53,7 @@ Item {
 
         color: "white"
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        text: infoProvider.title
 
         font {
             pixelSize: 20
@@ -71,6 +73,7 @@ Item {
 
         color: "gray"
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        text: infoProvider.authorName
 
         font {
             pixelSize: 16
@@ -80,9 +83,16 @@ Item {
     onVisibleChanged: {
         if (visible) {
             albumVideo.play();
+            PlayerController.changeAudioSource(infoProvider.audioSource);
         } else {
             albumVideo.seek(0);
             albumVideo.stop();
+        }
+    }
+
+    Component.onCompleted: {
+        if (PlayerController.currentSongIndex === infoProvider.songIndex) {
+            PlayerController.changeAudioSource(infoProvider.audioSource);
         }
     }
 }

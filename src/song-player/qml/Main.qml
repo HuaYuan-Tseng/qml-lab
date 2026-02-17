@@ -46,10 +46,13 @@ Window {
                 margins: 20
             }
 
-            songIndex: 0
-            title: "11111111"
-            authorName: "Rex.Tseng"
-            imageSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/image/song_1.jpg"
+            infoProvider {
+                songIndex: 0
+                title: "11111111"
+                authorName: "Rex.Tseng"
+                imageSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/image/song_1.jpg"
+                audioSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/audio/air_on_the_g_string.mp3"
+            }
         }
 
         AudioInfoBox {
@@ -62,10 +65,13 @@ Window {
                 margins: 20
             }
 
-            songIndex: 1
-            title: "222222222"
-            authorName: "Rex.Tseng"
-            imageSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/image/song_2.jpg"
+            infoProvider {
+                songIndex: 1
+                title: "222222222"
+                authorName: "Rex.Tseng"
+                imageSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/image/song_2.jpg"
+                audioSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/audio/eine_kleine_nachtmusik.mp3"
+            }
         }
 
         AudioInfoBox {
@@ -78,11 +84,14 @@ Window {
                 margins: 20
             }
 
-            songIndex: 2
-            title: "3333333333"
-            authorName: "Rex.Tseng"
-            imageSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/image/song_3.jpg"
-            videoSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/video/video_1.avi"
+            infoProvider {
+                songIndex: 2
+                title: "3333333333"
+                authorName: "Rex.Tseng"
+                imageSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/image/song_3.jpg"
+                videoSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/video/video_1.avi"
+                audioSource: "qrc:qt/qml/SongPlayer/src/song-player/asset/audio/symphony_no_5.mp3"
+            }
         }
     }
 

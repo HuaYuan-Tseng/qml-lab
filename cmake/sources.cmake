@@ -43,12 +43,19 @@ set(SONG_PLAYER_SOURCE
   ${CMAKE_SOURCE_DIR}/src/song-player/main.cpp
   ${CMAKE_SOURCE_DIR}/src/song-player/player_controller.cpp
 )
+set(SONG_PLAYER_QML_CPP_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/song-player/audio_info.cpp
+  ${CMAKE_SOURCE_DIR}/src/song-player/audio_info.h
+)
 set(SONG_PLAYER_QML
   src/song-player/qml/AudioInfoBox.qml
   src/song-player/qml/ImageBotton.qml
   src/song-player/qml/Main.qml
 )
 set(SONG_PLAYER_RESOURCE
+  src/song-player/asset/audio/air_on_the_g_string.mp3
+  src/song-player/asset/audio/eine_kleine_nachtmusik.mp3
+  src/song-player/asset/audio/symphony_no_5.mp3
   src/song-player/asset/icon/app_icon.ico
   src/song-player/asset/icon/next_icon.png
   src/song-player/asset/icon/pause_icon.png

@@ -336,6 +336,8 @@ qt_add_qml_module(${SONG_PLAYER_APP}
     ${SONG_PLAYER_QML}
     RESOURCES
     ${SONG_PLAYER_RESOURCE}
+    SOURCES
+    ${SONG_PLAYER_QML_CPP_SOURCE}
 )
 target_sources(${SONG_PLAYER_APP}
     PRIVATE

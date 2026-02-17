@@ -1,6 +1,7 @@
 #ifndef PLAYERCONTROLLER_H
 #define PLAYERCONTROLLER_H
 
+#include <QMediaPlayer>
 #include <QObject>
 
 class PlayerController : public QObject {
@@ -26,6 +27,7 @@ public:
 public slots:
     void switchToPreviousSong();
     void playPause();
+    void changeAudioSource(const QUrl& source);
 
 signals:
     void currentSongIndexChanged();
@@ -33,6 +35,7 @@ signals:
     void playingChanged();
 
 private:
+    QMediaPlayer m_mediaPlayer;
     int m_currentSongIndex = 0;
     int m_songCount = 3;
     bool m_playing = false;
