@@ -31,3 +31,11 @@ set(POS_LAYOUT_SOURCE
 set(POS_LAYOUT_QML
   src/pos-layout/qml/Main.qml
 )
+set(CUSTOM_QML_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/custom-qml/main.cpp
+)
+set(CUSTOM_QML_QML
+  src/custom-qml/qml/AudioInfoBox.qml
+  src/custom-qml/qml/Main.qml
+  src/custom-qml/qml/TextBotton.qml
+)

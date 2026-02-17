@@ -127,6 +127,7 @@ find_package(Qt6
 
 qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
+set(QT_QML_GENERATE_QMLLS_INI ON)
 
 # ------------------------------------------------------------------------------
 # Headers and sources.
@@ -287,6 +288,39 @@ set_target_properties(${POS_LAYOUT_APP}
     WIN32_EXECUTABLE TRUE
 )
 
+# --- Custom QML ---
+
+set(CUSTOM_QML_APP "custom-qml-app")
+
+qt_standard_project_setup()
+qt_add_executable(${CUSTOM_QML_APP} "")
+qt_add_qml_module(${CUSTOM_QML_APP}
+    URI CustomQML
+    VERSION 1.0
+    QML_FILES
+    ${CUSTOM_QML_QML}
+)
+target_sources(${CUSTOM_QML_APP}
+    PRIVATE
+    ${CUSTOM_QML_SOURCE}
+)
+target_include_directories(${CUSTOM_QML_APP}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/custom-qml
+)
+target_link_libraries(${CUSTOM_QML_APP}
+    PRIVATE
+    Qt6::Core
+    Qt6::Quick
+)
+set_target_properties(${CUSTOM_QML_APP}
+    PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER ${PROJECT_NAME}
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
 
 # -----------------------------------------------------------------------------
 # Set the building and warning options.
@@ -305,6 +339,7 @@ set_project_warnings(${SIGNAL_SLOT_APP})
 set_project_warnings(${QOBJECT_TREE_APP})
 set_project_warnings(${INTRO_QUICK_APP})
 set_project_warnings(${POS_LAYOUT_APP})
+set_project_warnings(${CUSTOM_QML_APP})
 
 # -----------------------------------------------------------------------------
 # Print the final status.
