@@ -39,3 +39,22 @@ set(CUSTOM_QML_QML
   src/custom-qml/qml/Main.qml
   src/custom-qml/qml/TextBotton.qml
 )
+set(SONG_PLAYER_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/song-player/main.cpp
+)
+set(SONG_PLAYER_QML
+  src/song-player/qml/AudioInfoBox.qml
+  src/song-player/qml/ImageBotton.qml
+  src/song-player/qml/Main.qml
+)
+set(SONG_PLAYER_RESOURCE
+  src/song-player/asset/icon/app_icon.ico
+  src/song-player/asset/icon/next_icon.png
+  src/song-player/asset/icon/pause_icon.png
+  src/song-player/asset/icon/play_icon.png
+  src/song-player/asset/icon/previous_icon.png
+  src/song-player/asset/image/song_1.jpg
+  src/song-player/asset/image/song_2.jpg
+  src/song-player/asset/image/song_3.jpg
+  src/song-player/asset/video/video_1.avi
+)

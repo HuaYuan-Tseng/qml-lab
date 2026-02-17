@@ -122,6 +122,7 @@ find_package(Qt6
     COMPONENTS
     Core
     Quick
+    Multimedia
     REQUIRED
 )
 
@@ -322,6 +323,43 @@ set_target_properties(${CUSTOM_QML_APP}
     WIN32_EXECUTABLE TRUE
 )
 
+# --- Song Player ---
+
+set(SONG_PLAYER_APP "song-player-app")
+
+qt_standard_project_setup()
+qt_add_executable(${SONG_PLAYER_APP} "")
+qt_add_qml_module(${SONG_PLAYER_APP}
+    URI SongPlayer
+    VERSION 1.0
+    QML_FILES
+    ${SONG_PLAYER_QML}
+    RESOURCES
+    ${SONG_PLAYER_RESOURCE}
+)
+target_sources(${SONG_PLAYER_APP}
+    PRIVATE
+    ${SONG_PLAYER_SOURCE}
+)
+target_include_directories(${SONG_PLAYER_APP}
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/src/song-player
+)
+target_link_libraries(${SONG_PLAYER_APP}
+    PRIVATE
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Multimedia
+)
+set_target_properties(${SONG_PLAYER_APP}
+    PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER ${PROJECT_NAME}
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
 # -----------------------------------------------------------------------------
 # Set the building and warning options.
 # -----------------------------------------------------------------------------
@@ -340,6 +378,7 @@ set_project_warnings(${QOBJECT_TREE_APP})
 set_project_warnings(${INTRO_QUICK_APP})
 set_project_warnings(${POS_LAYOUT_APP})
 set_project_warnings(${CUSTOM_QML_APP})
+set_project_warnings(${SONG_PLAYER_APP})
 
 # -----------------------------------------------------------------------------
 # Print the final status.
