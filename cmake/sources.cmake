@@ -41,6 +41,7 @@ set(CUSTOM_QML_QML
 )
 set(SONG_PLAYER_SOURCE
   ${CMAKE_SOURCE_DIR}/src/song-player/main.cpp
+  ${CMAKE_SOURCE_DIR}/src/song-player/player_controller.cpp
 )
 set(SONG_PLAYER_QML
   src/song-player/qml/AudioInfoBox.qml

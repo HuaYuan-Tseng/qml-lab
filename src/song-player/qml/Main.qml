@@ -1,4 +1,5 @@
 import QtQuick
+import com.PlayerController
 
 Window {
     id: root
@@ -110,7 +111,7 @@ Window {
 
                 source: "qrc:/qt/qml/SongPlayer/src/song-player/asset/icon/previous_icon.png"
 
-                onClicked: playerController.switchToPreviousSong()
+                onClicked: PlayerController.switchToPreviousSong()
             }
 
             ImageBotton {
@@ -119,9 +120,9 @@ Window {
                 width: 64
                 height: 64
 
-                source: playerController.playing ? "qrc:qt/qml/SongPlayer/src/song-player/asset/icon/pause_icon.png" : "qrc:/qt/qml/SongPlayer/src/song-player/asset/icon/play_icon.png"
+                source: PlayerController.playing ? "qrc:qt/qml/SongPlayer/src/song-player/asset/icon/pause_icon.png" : "qrc:/qt/qml/SongPlayer/src/song-player/asset/icon/play_icon.png"
 
-                onClicked: playerController.playPause()
+                onClicked: PlayerController.playPause()
             }
 
             ImageBotton {
@@ -132,28 +133,8 @@ Window {
 
                 source: "qrc:/qt/qml/SongPlayer/src/song-player/asset/icon/next_icon.png"
 
-                onClicked: playerController.switchToNextSong()
+                onClicked: PlayerController.switchToNextSong()
             }
-        }
-    }
-
-    QtObject {
-        id: playerController
-
-        property int currentSongIndex: 0
-        property int songCount: 3
-        property bool playing: false
-
-        function playPause() {
-            playing = !playing;
-        }
-
-        function switchToPreviousSong() {
-            currentSongIndex = (currentSongIndex - 1 + songCount) % songCount;
-        }
-
-        function switchToNextSong() {
-            currentSongIndex = (currentSongIndex + 1) % songCount;
         }
     }
 }
