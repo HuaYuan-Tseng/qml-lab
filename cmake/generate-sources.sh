@@ -158,3 +158,40 @@ find "$SONG_PLAYER_DIR" -type f \( -name "*.ico" -o -name "*.png" -o -name "*.jp
 done
 echo ")" >> "$OUTPUT_FILE"
 
+# src/song-player-with-http
+
+SONG_PLAYER_WITH_HTTP_DIR="$ROOT_DIR/src/song-player-with-http"
+echo "set(SONG_PLAYER_WITH_HTTP_SOURCE" >> "$OUTPUT_FILE"
+find "$SONG_PLAYER_WITH_HTTP_DIR" -type f -name "*.cpp" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    if [[ ! "$RELATIVE_PATH" =~ audio_info\. ]]; then
+        echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
+    fi
+done
+echo ")" >> "$OUTPUT_FILE"
+
+echo "set(SONG_PLAYER_WITH_HTTP_QML_CPP_SOURCE" >> "$OUTPUT_FILE"
+find "$SONG_PLAYER_WITH_HTTP_DIR" -type f \( -name "AudioInfo.cpp" -o -name "AudioInfo.h" -o -name "AudioSearchModel.h" -o -name "AudioSearchModel.cpp" \) 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  \${CMAKE_SOURCE_DIR}/$RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+
+echo "set(SONG_PLAYER_WITH_HTTP_QML" >> "$OUTPUT_FILE"
+find "$SONG_PLAYER_WITH_HTTP_DIR" -type f -name "*.qml" 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  $RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+
+echo "set(SONG_PLAYER_WITH_HTTP_RESOURCE" >> "$OUTPUT_FILE"
+find "$SONG_PLAYER_WITH_HTTP_DIR" -type f \( -name "*.ico" -o -name "*.png" -o -name "*.jpg" -o -name "*.avi" -o -name "*.mp3" \) 2>/dev/null | sort | while IFS= read -r FILE_PATH; do
+    RELATIVE_PATH="${FILE_PATH#$ROOT_DIR/}"
+    RELATIVE_PATH="${RELATIVE_PATH//\\//}"
+    echo "  $RELATIVE_PATH" >> "$OUTPUT_FILE"
+done
+echo ")" >> "$OUTPUT_FILE"
+

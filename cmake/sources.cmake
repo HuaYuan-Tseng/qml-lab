@@ -66,3 +66,44 @@ set(SONG_PLAYER_RESOURCE
   src/song-player/asset/image/song_3.jpg
   src/song-player/asset/video/video_1.avi
 )
+set(SONG_PLAYER_WITH_HTTP_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/AudioInfo.cpp
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/AudioInfoModel.cpp
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/AudioSearchModel.cpp
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/main.cpp
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/PlayerController.cpp
+)
+set(SONG_PLAYER_WITH_HTTP_QML_CPP_SOURCE
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/AudioInfo.cpp
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/AudioInfo.h
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/AudioSearchModel.cpp
+  ${CMAKE_SOURCE_DIR}/src/song-player-with-http/AudioSearchModel.h
+)
+set(SONG_PLAYER_WITH_HTTP_QML
+  src/song-player-with-http/qml/AudioInfoBox.qml
+  src/song-player-with-http/qml/ImageButton.qml
+  src/song-player-with-http/qml/main.qml
+  src/song-player-with-http/qml/PlaylistPanel.qml
+  src/song-player-with-http/qml/SearchField.qml
+  src/song-player-with-http/qml/SearchPanel.qml
+)
+set(SONG_PLAYER_WITH_HTTP_RESOURCE
+  src/song-player-with-http/assets/audio/air_on_the_g_string.mp3
+  src/song-player-with-http/assets/audio/eine_kleine_nachtmusik.mp3
+  src/song-player-with-http/assets/audio/reprezentuje_biede.mp3
+  src/song-player-with-http/assets/audio/symphony_no_5.mp3
+  src/song-player-with-http/assets/icons/add_icon.png
+  src/song-player-with-http/assets/icons/app_icon.ico
+  src/song-player-with-http/assets/icons/close_icon.png
+  src/song-player-with-http/assets/icons/menu_icon.png
+  src/song-player-with-http/assets/icons/next_icon.png
+  src/song-player-with-http/assets/icons/pause_icon.png
+  src/song-player-with-http/assets/icons/play_icon.png
+  src/song-player-with-http/assets/icons/previous_icon.png
+  src/song-player-with-http/assets/icons/search_icon.png
+  src/song-player-with-http/assets/icons/trash_icon.png
+  src/song-player-with-http/assets/images/song_1.jpg
+  src/song-player-with-http/assets/images/song_2.jpg
+  src/song-player-with-http/assets/images/song_3.jpg
+  src/song-player-with-http/assets/videos/video_1.avi
+)
